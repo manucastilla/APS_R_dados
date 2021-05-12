@@ -1,16 +1,16 @@
-circuits <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\circuits.csv")
-constructor_results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\constructor_results.csv")
-constructor_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\constructor_standings.csv")
-constructors <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\constructors.csv")
-driver_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\driver_standings.csv")
-drivers <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\drivers.csv")
-lap_times <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\lap_times.csv")
-pit_stops <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\pit_stops.csv")
-qualifying <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\qualifying.csv")
-races <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\races.csv")
-results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\results.csv")
-seasons <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\seasons.csv")
-status <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS\\status.csv")
+circuits <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\circuits.csv")
+constructor_results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_results.csv")
+constructor_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_standings.csv")
+constructors <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructors.csv")
+driver_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\driver_standings.csv")
+drivers <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\drivers.csv")
+lap_times <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\lap_times.csv")
+pit_stops <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\pit_stops.csv")
+qualifying <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+races <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\races.csv")
+results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\results.csv")
+seasons <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\seasons.csv")
+status <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\status.csv")
 
 View(circuits)
 View(constructor_results)
@@ -43,17 +43,40 @@ names(status)
 
 library("tidyverse")
 
-# CONSTRUCTOR
+########### CONSTRUCTOR ############
 
-constructor <- constructors %>% 
-                  inner_join(constructor_results, by = "constructorId")
-constructor <- constructor %>% 
-                  inner_join(constructor_standings, by = c("constructorId", "raceId", "points"))
-View(constructor)
+constructor <- constructor_results %>% 
+  rename(race_constructor_points = points) %>% 
+  inner_join(constructors, by = "constructorId")
 
-# DRIVERS
 
-driver <- drivers %>% 
-  inner_join(driver_standings, by = "driverId")
+constructor <- constructor_standings %>% 
+  rename(standing_constructor_points = points) %>% 
+  inner_join(constructor, by = c("constructorId", "raceId"))
 
-View(driver)
+# constructor <- results %>% 
+#   inner_join(constructor, by = "constructorId")
+
+############# DRIVERS ###############
+
+driver <- driver_standings %>% 
+  rename(standing_driver_points = points) %>% 
+  inner_join(drivers, by = "driverId")
+
+driver <- lap_times %>% 
+  rename(lap_time = time, 
+         lap_position = position, 
+         lap_milliseconds = milliseconds) %>% 
+  inner_join(driver, by = "driverId")
+
+driver <- pit_stops %>% 
+  rename(pit_time = time, 
+         pit_lap = lap, 
+         pit_duration = duration, 
+         pit_milliseconds = milliseconds) %>% 
+  inner_join(driver, by = "driverId")
+
+driver <- qualifying %>% 
+  rename(grid = position) %>% 
+  mutate(number = fct_reorder(as.character(number), number)) %>%
+  inner_join(driver, by = c("driverId", "number"))
