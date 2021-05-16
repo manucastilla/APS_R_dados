@@ -5,11 +5,14 @@ library(ggthemes)
 library(plotly)
 library(ggplot2)
 
-#f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-#f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+
+constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 View(f1)
 
@@ -24,7 +27,7 @@ names(f1)
 f1_18_20 %>% 
   filter(year == 2020, round == 17) %>% 
   arrange(standing_driver_points) %>% 
-  ggplot(aes(x = code, y = standing_driver_points, fill = code)) +
+  ggplot(aes(x = reorder(code, -standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
@@ -36,7 +39,7 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2020, round == 17) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = code, y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
@@ -54,10 +57,10 @@ f1_18_20 %>%
     labs(title = 'F1 race results 2020, top 5 drivers')
 
 f1_18_20 %>% 
-  filter(year == 2020) %>%
+  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
   group_by(code) %>% 
   arrange(desc(standing_driver_points)) %>% 
-  head(5) %>% 
+  # head(5) %>% 
   ggplot(aes(x = round, y = position, group = code, colour = code)) + 
   geom_line() +
   scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
@@ -68,7 +71,7 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2019, round == 21) %>% 
   arrange(standing_driver_points) %>% 
-  ggplot(aes(x = code, y = standing_driver_points, fill = code)) +
+  ggplot(aes(x = reorder(code, -standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
@@ -80,7 +83,7 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2019, round == 21) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = code, y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
@@ -94,7 +97,7 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2018, round == 21) %>% 
   arrange(standing_driver_points) %>% 
-  ggplot(aes(x = code, y = standing_driver_points, fill = code)) +
+  ggplot(aes(x = reorder(code, -standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
@@ -106,7 +109,7 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2018, round == 21) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = code, y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
@@ -118,6 +121,16 @@ f1_18_20 %>%
 
 ############## 2018 - 2020 ##############
 ##############    Junto    ##############
+
+#melhorar como ta feito esse grafico
+# ChampionShip
+f1_18_20 %>% 
+  filter(code == c("HAM", "BOT", "VER", "PER", "RIC", "VET", "SAI", "LEC")) %>% 
+  ggplot(aes(x=year, y=position, color = code, group = code)) +
+  geom_point() +
+  geom_line() +
+  labs(y="Position")+
+  facet_grid(code ~ .)
 
 # Nationality
 plt1 <- f1_18_20 %>%
@@ -174,3 +187,16 @@ f1 %>%
   geom_point(size = 2) +
   labs(x = "Year", y = "Points", title = "Championship") +
   theme(legend.title = element_blank())
+
+
+############## Constructor ############## 
+constructor %>% 
+  filter(year > 2015) %>% 
+  ggplot(aes(x=year, y=position, color = constructorRef, group = constructorRef)) +
+  geom_point() +
+  geom_line() +
+  labs(y="Position")+
+  facet_grid(constructorRef ~ .)
+
+
+
