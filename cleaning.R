@@ -64,7 +64,9 @@ library("tidyverse")
 races_year <- races %>% 
   select(year, raceId)
 
+
 ########### CONSTRUCTOR ############
+## para renomear usar select em vez de usar rename
 constructor_results <- select(constructor_results, -c(constructorResultsId, status))
 constructors <- select(constructors, -c(name, url))
 

@@ -1,0 +1,40 @@
+---
+title: "APS_formula1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introdução
+
+Para o projeto de R para ciência dos dados foi escolhido o tema *Fórmula 1*. A Fórmula 1 (F1) é um esporte automobilismo que acontece por todo lugar do mundo.
+O esporte acontece desde da década de 50 e desde então vem ganhando fama.
+A fórmula 1 funciona da seguinte maneira: existe 10 equipes, cada equipe tem dois pilotos para o campeonanto. Estes pilotos competem individualmente acumulando pontos ao longo do campenonato, enquanto isso seus pontos acumulados são somados para a contagem da equipe (construtores). Com isso, o piloto e a construtora com mais pontos no final da temporada são os campeões mundiais.
+Durante o campeonato acontece 21 corridas por todo lugar do mundo. A corrida acontece de domingos e para saber que posição cada piloto irá iniciar tem o qualifying no sábado na qual organiza a largada de acordo com o tempo feito uma volta.
+
+Apesar de que este esporte é muito mais que o piloto (porque o time não é apenas ele e sim os engenheiros, mecânicos, trabalhadores de fábrica, etc) em nossa análise será aprofundada no desempenho dos pilotos. 
+(desenvolver mais, mas depende em que vamos analisar)
+
+
+## Limpeza dos Dados
+A base de dados usada foi do [Kaggle](https://www.kaggle.com/rohanrao/formula-1-world-championship-1950-2020?select=races.csv). Nela consiste nos seguintes datasets:
+
+- circuits.csv : Contêm a informação sobre os curcuitos que ocorrem na F1.
+- constructor_results.csv : Resultado da corrida do campeonato das construtoras.
+- constructor_standings.csv : Resultado final do campeonato das construtoras.
+- constructor.csv : Informações sobre as construtoras da F1.
+- driver_standings.csv : Resultado final do campeonato dos pilotos.
+- drivers.csv : Informações sobre os pilotos da F1.
+- lap_times.csv : Informações sobre as voltas.
+- pit_stop.csv : Informações sobre as paradas de cada corrida.
+- qualifying.csv : Informações sobre o qualifying.
+- races.csv : Informações sobre as corridas da F1.
+- results.csv : Resultados da corrida.
+
+Como existem muitos dados (informações desde 1950 até hoje em dia) não foi possível juntar todas as tabelas em um dataframe só. Então os dados foram dividos em dois dataframe: um dataframe das construtoras e outra com as informações dos pilotos e suas corridas. 
+
+Criando então a base de dados das construtoras foi eliminado algumas colunas desnecessárias, outras renomeada. Ao limpar, para juntar as bases de dados foi feito o join.
+(colocar o trecho do código)
+
