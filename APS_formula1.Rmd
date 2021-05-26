@@ -33,8 +33,32 @@ A base de dados usada foi do [Kaggle](https://www.kaggle.com/rohanrao/formula-1-
 - races.csv : Informações sobre as corridas da F1.
 - results.csv : Resultados da corrida.
 
-Como existem muitos dados (informações desde 1950 até hoje em dia) não foi possível juntar todas as tabelas em um dataframe só. Então os dados foram dividos em dois dataframe: um dataframe das construtoras e outra com as informações dos pilotos e suas corridas. 
+Como existem muitos dados (informações desde 1950 até hoje em dia) não foi possível juntar todas as tabelas em um dataframe só decidimos que iriamos observar os fenômenos da fórmula 1 da atualidade e os dados seriam dividos em dois dataframe: um dataframe das construtoras e outra com as informações dos pilotos e suas corridas. 
 
-Criando então a base de dados das construtoras foi eliminado algumas colunas desnecessárias, outras renomeada. Ao limpar, para juntar as bases de dados foi feito o join.
-(colocar o trecho do código)
+Criando então a base de dados das construtoras foi eliminado algumas colunas desnecessárias, outras renomeada. Ao limpar, para juntar as bases de dados foi feito o join. Podemos ver no exemplo abaixo como nossa limpeza foi.
+```{r}
+constructor_results <- select(constructor_results, -c(constructorResultsId, status))
+constructors <- select(constructors, -c(name, url))
+
+constructor <- constructor_results %>% 
+  select(race_constructor_points = points) %>% 
+  inner_join(constructors, by = "constructorId")
+
+```
+Realizamos essa etapa até juntar todas as bases necessárias.
+Em alguns casos também foram feitos alguns ajustes como no caso do time: Aston Martin. Esta era conhecida como Force India até que em 2018 mudou novamente seu nome para Racing Point. Esse ano seu nome foi mudado novamente para Aston Martin. Logo, foi feito um mutate para poder ter os dados ao longo dos anos. Mesmo fenômeno para Alpha Tauri na qual seu nome era Toro Rosso.
+Portanto fizemos o seguinte mutate:
+```{r}
+constructor <- constructor %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'racing_point', 'aston_martin')) %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'force_india', 'aston_martin')) %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'toro_rosso', 'alphatauri')) %>% 
+  filter(raceId <= 1073)
+```
+
+
+## Análise
+
+
+
 

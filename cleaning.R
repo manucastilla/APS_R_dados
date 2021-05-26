@@ -41,22 +41,22 @@ status <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\AP
 # View(seasons)
 # View(status)
 
-names(circuits)
-names(constructor_results)
-names(constructor_standings)
-names(constructors)
-
-names(lap_times)
-names(pit_stops)
-
-names(seasons)
-names(status)
-
-names(driver_standings)
-names(drivers)
-names(qualifying)
-names(races)
-names(results)
+# names(circuits)
+# names(constructor_results)
+# names(constructor_standings)
+# names(constructors)
+# 
+# names(lap_times)
+# names(pit_stops)
+# 
+# names(seasons)
+# names(status)
+# 
+# names(driver_standings)
+# names(drivers)
+# names(qualifying)
+# names(races)
+# names(results)
 
 
 library("tidyverse")
@@ -66,20 +66,23 @@ races_year <- races %>%
 
 
 ########### CONSTRUCTOR ############
-## para renomear usar select em vez de usar rename
+
 constructor_results <- select(constructor_results, -c(constructorResultsId, status))
 constructors <- select(constructors, -c(name, url))
 
 constructor <- constructor_results %>% 
-  rename(race_constructor_points = points) %>% 
+  select(race_constructor_points = points) %>% 
   inner_join(constructors, by = "constructorId")
 
 constructor_standings <- select(constructor_standings, -c(constructorStandingsId, positionText ))
 constructor <- constructor_standings %>% 
-  rename(standing_constructor_points = points) %>% 
+  select(standing_constructor_points = points) %>% 
   inner_join(constructor, by = c("constructorId", "raceId"))
 
 constructor <- constructor %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'racing_point', 'aston_martin')) %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'force_india', 'aston_martin')) %>% 
+  mutate(constructorRef = replace(constructorRef, constructorRef == 'toro_rosso', 'alphatauri')) %>% 
   filter(raceId <= 1073)
 
 constructor <- races_year %>% 
@@ -94,7 +97,7 @@ names(drivers)
 names(driver_standings)
 
 driver <- driver_standings %>% 
-  rename(standing_driver_points = points) %>% 
+  select(standing_driver_points = points) %>% 
   inner_join(drivers, by = "driverId")
 
 driver <- select(driver, -c(url, number, forename, surname, dob,
@@ -118,7 +121,7 @@ names(races)
 races <- select(races, -c(url, time, date))
                 
 driver <- races %>% 
-  rename(TrackName = name) %>% 
+  select(TrackName = name) %>% 
   filter(raceId <= 1073) %>% 
   inner_join(driver, by = "raceId")
 

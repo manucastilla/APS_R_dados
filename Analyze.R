@@ -4,6 +4,7 @@ library(ggrepel)
 library(ggthemes)
 library(plotly)
 library(ggplot2)
+library(dplyr)
 
 f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
 # f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
@@ -16,7 +17,7 @@ constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_da
 
 View(f1)
 
-names(f1)
+names(constructor)
 
 ############## 2018 - 2020 ##############
 ##############  Separado  ##############
@@ -191,12 +192,13 @@ f1 %>%
 
 ############## Constructor ############## 
 constructor %>% 
-  filter(year > 2015) %>% 
-  ggplot(aes(x=year, y=position, color = constructorRef, group = constructorRef)) +
+  filter(year.x > 2015) %>% 
+  ggplot(aes(x=year.x, y=position, color = constructorRef, group = constructorRef)) +
   geom_point() +
   geom_line() +
   labs(y="Position")+
   facet_grid(constructorRef ~ .)
+
 
 
 
