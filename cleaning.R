@@ -1,30 +1,30 @@
-# circuits <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\circuits.csv")
-# constructor_results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_results.csv")
-# constructor_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_standings.csv")
-# constructors <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructors.csv")
-# driver_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\driver_standings.csv")
-# drivers <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\drivers.csv")
-# lap_times <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\lap_times.csv")
-# pit_stops <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\pit_stops.csv")
-# qualifying <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
-# races <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\races.csv")
-# results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\results.csv")
-# seasons <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\seasons.csv")
-# status <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\status.csv")
+circuits <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\circuits.csv")
+constructor_results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_results.csv")
+constructor_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructor_standings.csv")
+constructors <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\constructors.csv")
+driver_standings <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\driver_standings.csv")
+drivers <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\drivers.csv")
+lap_times <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\lap_times.csv")
+pit_stops <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\pit_stops.csv")
+qualifying <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+races <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\races.csv")
+results <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\results.csv")
+seasons <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\seasons.csv")
+status <- read.csv("C:\\Users\\VICTOR HABIB\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\status.csv")
 
-circuits <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\circuits.csv")
-constructor_results <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructor_results.csv")
-constructor_standings <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructor_standings.csv")
-constructors <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructors.csv")
-driver_standings <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\driver_standings.csv")
-drivers <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\drivers.csv")
-lap_times <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\lap_times.csv")
-pit_stops <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\pit_stops.csv")
-qualifying <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
-races <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\races.csv")
-results <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\results.csv")
-seasons <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\seasons.csv")
-status <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\status.csv")
+# circuits <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\circuits.csv")
+# constructor_results <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructor_results.csv")
+# constructor_standings <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructor_standings.csv")
+# constructors <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\constructors.csv")
+# driver_standings <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\driver_standings.csv")
+# drivers <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\drivers.csv")
+# lap_times <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\lap_times.csv")
+# pit_stops <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\pit_stops.csv")
+# qualifying <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
+# races <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\races.csv")
+# results <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\results.csv")
+# seasons <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\seasons.csv")
+# status <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\status.csv")
 
 
 # View(circuits)
@@ -54,7 +54,7 @@ status <- read.csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\AP
 # 
 # names(driver_standings)
 # names(drivers)
-# names(qualifying)
+names(qualifying)
 # names(races)
 # names(results)
 
@@ -111,10 +111,10 @@ names(qualifying)
 # qualifying <-  select(qualifying, -c(q1, q2, q3, qualifyId, number, 
 #                                      constructorId)) 
 
-# driver <- qualifying %>% 
-#   rename(grid = position) %>% 
-#   filter(raceId <= 1073) %>% 
-#   inner_join(driver, by = "raceId")
+driver <- qualifying %>%
+  rename(grid = position) %>%
+  filter(raceId <= 1073) %>%
+  inner_join(driver, by = "raceId")
 
 names(races)
 

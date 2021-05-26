@@ -6,14 +6,14 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
 
-constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
-# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
+# constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 View(f1)
 
@@ -66,6 +66,7 @@ f1_18_20 %>%
   geom_line() +
   scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
   labs(title = 'F1 race results 2020, top 5 drivers')
+
 
 
 # 2019
@@ -146,7 +147,6 @@ plt1 <- f1_18_20 %>%
 
 ggplotly(plt1, tooltip = 'wins')
 
-
 # Nationality
 plt2 <- f1_18_20 %>%
   group_by(nationality) %>% 
@@ -162,11 +162,32 @@ plt2 <- f1_18_20 %>%
 ggplotly(plt2, tooltip = 'wins')
 
 
+#FAZER UM GRÁFICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM CADA PISTA
+plt3 <- f1_18_20 %>% 
+  filter(year == 2020) %>% #, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
+  #group_by(TrackName) %>% 
+  arrange(wins) %>% 
+  ggplot(aes(x = reorder(code, -wins), y = wins, fill = TrackName)) +
+  geom_col() +
+  labs(x = "Driver", y = "Wins", 
+       title = "Championship", 
+       subtitle = "Season 2020") +
+  scale_x_discrete(guide = guide_axis(angle = 70)) +
+  theme(legend.title = element_blank())
+
+ggplotly(plt3, tooltip = 'wins')
+
+# IDEIA: ACRESCENTAR A POSICAO DE GRID DO QUALLIFYING E CRIAR UMA COLUNA QUE 
+# CALCULA QUANTAS ULTRAPASSAGENS FORAM FEITAS NA CORRIDA:
+# POSITION_RACE - POSITION_GRID (EM QUE SER NUMERO PRA FAZER A CONTA)
+# PLOTAR UM GRAFICO QUE MOSTR AS ULTRAPASSAGENS (PILOTO QUE MAIS ULTRAPASSOU AO
+# LONGO DO ANO -> CHEQUITO CTZ RS)
+# PROBLEMA: NÃO TA RODANDO O ARQUIVO "CLEANING" 
 
 ############## Geral ##############
 
 # Nationality
-plt3 <- f1 %>%
+plt4 <- f1 %>%
   group_by(nationality) %>% 
   ggplot(aes(wins, nationality, color = nationality)) +
   geom_point(size = 2) +
@@ -177,7 +198,7 @@ plt3 <- f1 %>%
   theme(legend.title = element_blank(),
         legend.position = "none")
 
-ggplotly(plt3, tooltip = 'wins')
+ggplotly(plt4, tooltip = 'wins')
 
 f1 %>% 
   #filter(!is.na(standing_driver_points)) %>% 
