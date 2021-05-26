@@ -9,12 +9,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introdução
 
-Para o projeto de R para ciência dos dados foi escolhido o tema *Fórmula 1*. A Fórmula 1 (F1) é um esporte automobilismo que acontece por todo lugar do mundo.
-O esporte acontece desde da década de 50 e desde então vem ganhando fama.
-A fórmula 1 funciona da seguinte maneira: existe 10 equipes, cada equipe tem dois pilotos para o campeonanto. Estes pilotos competem individualmente acumulando pontos ao longo do campenonato, enquanto isso seus pontos acumulados são somados para a contagem da equipe (construtores). Com isso, o piloto e a construtora com mais pontos no final da temporada são os campeões mundiais.
-Durante o campeonato acontece 21 corridas por todo lugar do mundo. A corrida acontece de domingos e para saber que posição cada piloto irá iniciar tem o qualifying no sábado na qual organiza a largada de acordo com o tempo feito uma volta.
+Para o projeto de R para ciência dos dados foi escolhido o tema *Fórmula 1*. A Fórmula 1 (F1) é a competição mais popular do automobilismo.
+O esporte acontece desde a década de 50 e desde então vem ganhando fama.
+A fórmula 1 funciona da seguinte maneira: existe 10 equipes, cada uma tem dois pilotos que copõem o grid na temporada. Estes pilotos competem individualmente acumulando pontos ao longo do campenonato, enquanto seus pontos acumulados são somados para a contagem da equipe (construtores). Com isso, o piloto e a construtora com mais pontos no final da temporada são os campeões mundiais. É importante ressaltar que são disputas diferentes dentro da mesma competição, já que não necessariamente o piloto campeão faz parte da equipe campeã.
+Durante o campeonato acontecem, em torno de 21 corridas por vários lugares do mundo. A corrida acontece aos domingos e para saber que posição cada piloto irá iniciar tem o qualifying no sábado na qual organiza a largada de acordo com o tempo feito uma volta: quanto mais rápido, melhor.
 
-Apesar de que este esporte é muito mais que o piloto (porque o time não é apenas ele e sim os engenheiros, mecânicos, trabalhadores de fábrica, etc) em nossa análise será aprofundada no desempenho dos pilotos. 
+Como visto, apesar da competição entre os pilotos transpassar a imagem de um esporte individual, este esporte é muito mais que o piloto, porque o time não é apenas ele e sim os engenheiros, mecânicos, trabalhadores de fábrica, etc. Entretanto, em nossa análise será aprofundada no desempenho individual dos pilotos. 
 (desenvolver mais, mas depende em que vamos analisar)
 
 
