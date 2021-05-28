@@ -67,12 +67,18 @@ races_year <- races %>%
 
 ########### CONSTRUCTOR ############
 
+
 constructor_results <- select(constructor_results, -c(constructorResultsId, status))
 constructors <- select(constructors, -c(name, url))
 
 constructor <- constructor_results %>% 
-  select(race_constructor_points = points) %>% 
+  rename(race_constructor_points = points) %>% 
   inner_join(constructors, by = "constructorId")
+
+names(constructor_results)
+names(constructors)
+class(constructor_results$constructorId)
+class(constructors$constructorId)
 
 constructor_standings <- select(constructor_standings, -c(constructorStandingsId, positionText ))
 constructor <- constructor_standings %>% 
@@ -95,6 +101,9 @@ constructor <- races_year %>%
 
 names(drivers)
 names(driver_standings)
+
+
+
 
 driver <- driver_standings %>% 
   select(standing_driver_points = points) %>% 
