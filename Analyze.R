@@ -6,17 +6,17 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
-qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
+# qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
 
-# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-# f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
 
-# constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
-constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
+constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 View(f1)
 
@@ -283,7 +283,7 @@ plt2 <- f1_18_20 %>%
 ggplotly(plt2, tooltip = 'wins')
 
 View(f1_18_20)
-#GRÁFICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM CADA PISTA
+#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM CADA PISTA
 plt3 <- f1_18_20 %>% 
   group_by(TrackName) %>% 
   filter(position == 1) %>% #, code %in% c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
@@ -307,7 +307,7 @@ ggplotly(plt3, tooltip = 'wins')
 # POSITION_RACE - POSITION_GRID (EM QUE SER NUMERO PRA FAZER A CONTA)
 # PLOTAR UM GRAFICO QUE MOSTR AS ULTRAPASSAGENS (PILOTO QUE MAIS ULTRAPASSOU AO
 # LONGO DO ANO -> CHEQUITO CTZ RS)
-# PROBLEMA: NÃO TA RODANDO O ARQUIVO "CLEANING" 
+# PROBLEMA: N?O TA RODANDO O ARQUIVO "CLEANING" 
 
 ############## Geral ##############
 
@@ -342,7 +342,7 @@ constructor %>%
   ggplot(aes(x=year.x, y=position, color = constructorRef, group = constructorRef)) +
   geom_point() +
   geom_line() +
-  labs(y="Position")+
+  labs(x = "", y="Position", title = "Resultado final de cada construtora")+
   facet_grid(constructorRef ~ .)
 
 

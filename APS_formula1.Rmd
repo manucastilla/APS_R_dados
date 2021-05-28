@@ -56,7 +56,6 @@ constructor <- constructor %>%
   filter(raceId <= 1073)
 ```
 
-
 ## Análise
 
 
