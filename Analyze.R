@@ -6,17 +6,17 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
-# qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+# qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
+qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
 
-f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
 
-constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
-# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
+# constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 View(f1)
 
@@ -45,14 +45,15 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2020, round == 17) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2020") +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
+  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
-        legend.position = "none")
+        legend.position = "none") +
+  coord_flip()
 
 # Each drivers gets his own
 f1_18_20 %>% 
@@ -93,32 +94,14 @@ f1_ot <- qualifying %>%
   inner_join(f1, by = c("driverId", "raceId"))
 
 
-# proximos dois graficos soh muda o head() -> coloquei pra ter soh os positivos
-# tentei: "select(overtakes>0)" -> deu erro
-
 #5 PRIMEIROS
 f1_ot %>%
   filter(year == "2020", code %in% c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
   mutate(overtakes = (grid - position)) %>% 
-  arrange(desc(overtakes)) %>% 
-  ggplot(aes(x = reorder(TrackName, -overtakes), y = overtakes, fill = code)) +
+  ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes", 
-       subtitle = "Season 2020") +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
-  theme(legend.title = element_blank())
-
-#5 PRIMEIROS  
-f1_ot %>%
-  filter(year == "2020", code %in% c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
-  mutate(overtakes = (grid - position)) %>% 
-  arrange(desc(overtakes)) %>% 
-  head(53) %>% 
-  ggplot(aes(x = reorder(TrackName, -overtakes), y = overtakes, fill = code)) +
-  geom_col() +
-  labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes", 
+       title = "Overtakes - 1º ao 5º colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -128,12 +111,10 @@ f1_ot %>%
 f1_ot %>%
   filter(year == "2020", code %in% c("SAI", "ALB", "LEC", "NOR", "GAS")) %>% 
   mutate(overtakes = (grid - position)) %>% 
-  arrange(desc(overtakes)) %>% 
-  #head(53) %>% 
-  ggplot(aes(x = reorder(TrackName, -overtakes), y = overtakes, fill = code)) +
+  ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes", 
+       title = "Overtakes - 6º ao 10º colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -143,12 +124,10 @@ f1_ot %>%
 f1_ot %>%
   filter(year == "2020", code %in% c("STR", "OCO", "VET", "KVY", "RAI")) %>% 
   mutate(overtakes = (grid - position)) %>% 
-  arrange(desc(overtakes)) %>% 
-  #head(53) %>% 
-  ggplot(aes(x = reorder(TrackName, -overtakes), y = overtakes, fill = code)) +
+  ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes", 
+       title = "Overtakes - 11º ao 15º colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -158,12 +137,10 @@ f1_ot %>%
 f1_ot %>%
   filter(year == "2020", code %in% c("GIO", "RUS", "GRO", "MAG", "LAT")) %>% 
   mutate(overtakes = (grid - position)) %>% 
-  arrange(desc(overtakes)) %>% 
-  #head(53) %>% 
-  ggplot(aes(x = reorder(TrackName, -overtakes), y = overtakes, fill = code)) +
+  ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes", 
+       title = "Overtakes - 16º ao 20º colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -188,14 +165,15 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2019, round == 21) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2019") +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
+  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
-        legend.position = "none")
+        legend.position = "none") +
+  coord_flip()
 
 
 # 2018
@@ -215,14 +193,15 @@ f1_18_20 %>%
 f1_18_20 %>% 
   filter(year == 2018, round == 21) %>% 
   arrange(wins) %>% 
-  ggplot(aes(x = reorder(code, -wins), y = wins, fill = code)) +
+  ggplot(aes(x = reorder(code, wins), y = wins, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2018") +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
+  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
-        legend.position = "none")
+        legend.position = "none") +
+  coord_flip()
 
 
 ############## 2018 - 2020 ##############
@@ -292,7 +271,7 @@ plt3 <- f1_18_20 %>%
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
-       subtitle = "Season 2020") +
+       subtitle = "Seasons 2018-2020") +
   # scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank()) +
   coord_flip()
@@ -335,6 +314,32 @@ f1 %>%
   labs(x = "Year", y = "Points", title = "Championship") +
   theme(legend.title = element_blank())
 
+#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM MONACO
+f1 %>% 
+  filter(position == 1, TrackName == "Monaco Grand Prix") %>%
+  ggplot(aes(x = driverRef, y = position, fill = driverRef)) +
+  geom_col() +
+  labs(x = "Driver", y = "Wins", 
+       title = "Monaco Grand Prix", 
+       subtitle = "All Seasons") +
+  theme(legend.title = element_blank(),
+        legend.position = "none") +
+  coord_flip()
+
+
+#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS NA HISTÓRIA
+f1 %>% 
+  filter(position == 1) %>% 
+  ggplot(aes(x = reorder(driverRef, position), y = position, fill = driverRef)) +
+  geom_col() +
+  labs(x = "Driver", y = "Wins", 
+       title = "Championship", 
+       subtitle = "Seasons 1950-2020") +
+  theme(legend.title = element_blank(),
+        legend.position = "none") +
+  coord_flip()
+
+
 
 ############## Constructor ############## 
 constructor %>% 
@@ -346,5 +351,15 @@ constructor %>%
   facet_grid(constructorRef ~ .)
 
 
+#TENTATIVA
+constructor %>% 
+  filter(year.x > 2015) %>% 
+  group_by(raceId) %>%
+  ggplot(aes(x = year.x, y = position, group = constructorRef, colour = constructorRef)) + 
+  geom_line() + 
+  theme(legend.title = element_blank()) +
+  #facet_wrap(~ constructorRef) +
+  #scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
+  labs(title = "Resultado final de construtores ao longo dos últimos 5 anos")
 
-
+names(constructor)
