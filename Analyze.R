@@ -57,24 +57,24 @@ f1_18_20 %>%
 
 
 # # Each drivers gets his own
-# f1_18_20 %>% 
-#   filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
-#   ggplot(aes(x = round, y = standing_driver_points, group = code, colour = code)) + 
-#     geom_line(show.legend = FALSE) + 
-#     facet_wrap(~ code) +
-#     scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
-#     labs(title = 'F1 race results 2020, top 5 drivers')
+f1_18_20 %>%
+  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
+  ggplot(aes(x = round, y = standing_driver_points, group = code, colour = code)) +
+    geom_line(show.legend = FALSE) +
+    facet_wrap(~ code) +
+    scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
+    labs(title = 'F1 race results 2020, top 5 drivers')
 
 
-# f1_18_20 %>% 
-#   filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
-#   group_by(code) %>% 
-#   arrange(desc(standing_driver_points)) %>% 
-#   # head(5) %>% 
-#   ggplot(aes(x = round, y = position, group = code, colour = code)) + 
-#   geom_line() +
-#   scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
-#   labs(title = 'F1 race results 2020, top 5 drivers')
+f1_18_20 %>%
+  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
+  group_by(code) %>%
+  arrange(desc(standing_driver_points)) %>%
+  # head(5) %>%
+  ggplot(aes(x = round, y = position, group = code, colour = code)) +
+  geom_line() +
+  scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
+  labs(title = 'F1 race results 2020, top 5 drivers')
 
 
 ########## OVERTAKES ###########
