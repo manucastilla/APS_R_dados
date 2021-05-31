@@ -152,7 +152,41 @@ Na Fórmula 1, o objetivo do piloto é ser campeão mundial. Para alcançar esse
 
 Em 2020 aconteceu algo interessante que retifica a importância da estabilidade. O segundo colocado foi decidido por essa característica, pois tanto Bottas quanto Verstappen venceram a mesma quantidade de corridas. O resultado final foi bem acirrado, porém, o companheiro de equipe de Hamilton, Valtteri Bottas, conquistou o segundo lugar do campeonato com uma leve vantagem sobre o rival Max Verstappen. Como os dois pilotos venceram o mesmo número de Grand Prix, essa diferença se deveu ao fato do finlandês ter sido mais estável durante o campeonato, ou seja, o segundo colocado performou melhor que o terceiro nas etapas em que o subobjetivo não foi alcançado.
 
-Em suma, é muito importante que o piloto se mantenha concentrado durante a temporada inteira, já que vencer algumas corridas e performar mal em outras não é suficiente.
+Em suma, é muito importante que o piloto se mantenha concentrado durante a temporada inteira, já que vencer algumas corridas e performar mal em outras não é suficiente. Verifica-se a seguir a performance durante a temporada de 2020 dos top 5 pilotos nas corridas:
+
+```
+#Points
+f1_18_20 %>%
+  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
+  ggplot(aes(x = round, y = standing_driver_points, group = code, colour = code)) +
+    geom_line(show.legend = FALSE) +
+    facet_wrap(~ code) +
+    scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
+    labs(title = 'F1 race results 2020, top 5 drivers')
+ 
+```
+
+![](race_results_top_5_points.jpg)
+
+Ao analisarmos os 5 pilotos mais bem colocados, vemos que sempre há um aumento de crescimento (como deveria ser). Porém ao vermos o coeficiente angular, vemos que o do Hamilton é quase 1, tendo uma constância. Logo atrás, encontra-se seu companheiro de equipe, Bottas, seguido do rival Verstappen, ambos apresentando uma constância em conquistar pontos, porém, de maneira menos acentuada que o campeão da temporada. Já o Ricciardo, apesar da consistência, não performou de modo suficiente para que aumentasse seus pontos rapidamente. Por fim, o Perez começa não conseguindo acumular pontos, porém houve um momento em que tudo mudou. Podemos ver esses fenômeno melhor no gráfico abaixo:
+
+
+```
+#Position   
+f1_18_20 %>%
+  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
+  group_by(code) %>%
+  arrange(desc(standing_driver_points)) %>%
+  # head(5) %>%
+  ggplot(aes(x = round, y = position, group = code, colour = code)) +
+  geom_line() +
+  scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
+  labs(title = 'F1 race results 2020, top 5 drivers')
+
+```
+
+![](race_results_top_5_position.jpg)
+Podemos ver confirmar então que de fato o coeficiente angular do Lewis é 1, permanecendo em primeiro. Podemos ver que Bottas e Verstappen apesar de uma variância sempre permaneceu em uma posição boa. Já Ricciardo começou o campeonato fazendo poucos pontos e foi cada vez mais tendo posições melhores. Já o Perez havia iniciado bem o campeonato, porém começou a ficar para trás nas corridas, até que, começou a subir de posição rapidamente.
 
 Migrando a visão da análise, deu-se um foco também para as construtoras. Já sabe-se como foi o desemoenho dos pilotos ao longo dos anos, porém, ainda nada se sabe sobre as construtoras. Assim, a terceira análise está focada na permormance das equipes. Através do código abaixo, pôde gerar insumos para analisar o coletivo:
   
@@ -252,8 +286,8 @@ Ao observar o Hamilton vemos que não há muita variedade. Sabendo então que el
 
 Além disso, vemos que quem teve maior variância de ultrapassagem é o piloto Sergio Perez. Sérgio Perez fazia parte da construtora Racing Point (atualmente Aston Martin). Apesar de ter algumas corridas onde perdeu posições, tiverem corridas ontem ganhou posições e até mais do que perdeu. Duas corridas se destacam: Abu Dhabi Grand Prix e Syrian Grand Prix. A primeira foi uma das últimas corridas da temporada. Este estava sem time para correr na próxima temporada, então tinha que se destacar para permanecer na Fórmula 1. A pressão era grande, e logo na primeira volta ele teve um pequeno acidente e ficou na última posição. Apesar de tudo indicar que seria impossível obter as posições perdidas, Sérgio Perez venceu a corrida sendo o único piloto a sair da última posição e terminar em primeiro lugar.
 
-![overtake6_10](overtake6_10.jpg)
-![overtake11_15](overtake11_15.jpg)
+![](overtake6_10.jpg)
+![](overtake11_15.jpg)
 
 Ao analisar as ultrapassagens ao longo da temporada dos pilotos que terminaram o campeonato entre a sexta e décima quinta posição, nota-se uma diferença visual grande comparado com o gráfico de ultrapassagem dos pilotos que encerraram a temporada nas cinco primeiras colocações. É notório que esse pelotão realizou mais ultrapassagens ao longo do campeonato, já que visualmente esses gráficos estão mais preenchidos eu o outro. Sobre esse fato é importante destacar que isso acontece, pois tanto os carros, quanto os pilotos são mais equilibrados em performance. Quem assiste à Fórmula 1, muitas vezes, está preocupado com o pelotão da frente, especialmente em quem ganha a corrida. Entretanto, se mudar a visão de interesse, tem-se uma competição muito mais emocionante e acirrada entre esses pilotos.
 
@@ -312,6 +346,13 @@ Chile, República-Tcheca, Dinamarca, Hungria, Índia, Indonésia, Irlanda, Japã
 
 Os brasileiros, por sua vez, conquistaram 8 vezes o título mundial da Fórmula 1, sendo o terceiro país, junto com a Finlândia, a ganhar o troféu mais vezes. Esse valor é alto por conta, principalmente, de dois personagens que marcaram a história do automobilismo, Ayrton Senna e Nelson Piquet.
 
+
 ## Conclusão
 
-Diante de todos os dados, podemos observar de que a fórmula 1 é um esporte onde há rotatividade de campeões, tanto por causa das habilidades, mas também pela eficiência do carro.
+Após a construção de alguns gráficos, desenvolveu-se uma análise recheada de informações e fatos relevantes sobre a história da Fórmula 1. Foi possível concluir que não se trata apenas de corridas, e sim, de um esporte. Apesar de ser uma prática individual, todas as conquistas só são possíveis por conta da enorme equipe por trás, responsável por todo suporte para os pilotos, desde a construção dos carros, até o pit stop durante as corridas. 
+
+Diante de todos os dados, podemos observar que a Fórmula 1 é um esporte onde há rotatividade de campeões, tanto por causa das habilidades, mas também pela eficiência do carro. Entretanto, sobre o momento atual da Fórmula 1, o que se espera agora é saber quem será capaz de deter a hegemonia da Mercedes, e se consagrará o próximo campeão mundial. A competição está no início, e por muito tempo não se via um piloto diferente de Lewis Hamilton a estar na liderança da temporada. A RedBull, com Max Verstappen, líder do campeonato, veio com força máxima nesse ano e brigará em alto nível com a rival Mercedes de Lewis. 
+
+Apesar do sucesso da análise, algumas ressalvas são importantes destacar, como a inconsistência dos dados. Ao longo do projeto foi possível identificar informações equivocadas, que afetaram a análise de certa forma, já que as explicações e discussões foram baseadas nos gráficos construídos a partir da base de dados coletada. Assim, pensando em futuras implementações, é necessário realizar revisão das informações e o devido tratamento para que as conclusões façam jus a história verídica do maior esporte automobilístico do mundo. 
+
+Além disso, para dar continuidade no projeto, seria válido implementar um modelo de predição dos campeões das temporadas atuais, sem mesmo elas terem terminado, ou até mesmo, começado. O modelo seria supervisionado, ou seja, haveria uma variável resposta que se pretende prever: campeão da temporada. Para isso, um primeiro passo já foi dado, uma vez que a análise exploratória dos dados foi iniciada. A próxima etapa seria identificar as variáveis independentes que fariam parte do modelo e que seriam fundamentais para prever a variável dependente. Os modelos sugeridos são métodos de regressão, como a linear, múltipla ou Random Forest. Algumas variáveis podem ser importantes, como: número de ultrapassagens totais por piloto, dados históricos sobre a classificação das respectivas construtoras que cada piloto representa, classificação nos treinos, voltas mais rápidas, entre outras. Enfim, para defini-las seria necessário encontrar correlações entre os tópicos e verificar quais teriam influência na resposta para inseri-las no modelo.

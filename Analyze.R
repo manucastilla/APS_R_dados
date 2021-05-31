@@ -6,21 +6,17 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
-# qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+# qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
+qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
 
-f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
 
-constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
-# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
-
-View(f1)
-
-names(constructor)
+# constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 ############## 2018 - 2020 ##############
 ##############  Separado  ##############
@@ -70,7 +66,6 @@ f1_18_20 %>%
   filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
   group_by(code) %>%
   arrange(desc(standing_driver_points)) %>%
-  # head(5) %>%
   ggplot(aes(x = round, y = position, group = code, colour = code)) +
   geom_line() +
   scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
@@ -211,75 +206,25 @@ f1_18_20 %>%
 ############## 2018 - 2020 ##############
 ##############    Junto    ##############
 
-
-#melhorar como ta feito esse grafico
-# ChampionShip
-# f1_18_20 %>% 
-#   filter(code == c("VET", "SAI", "LEC", "ALB", "GAS", "NOR", "RUS")) %>% 
-#   ggplot(aes(year, position, color = code, group = code)) +
-#   geom_point() +
-#   geom_line() +
-#   labs(y="Position")+
-#   facet_grid(code ~ .)
-
-# Nationality
-plt1 <- f1_18_20 %>%
-  group_by(code) %>% 
-  ggplot(aes(code, wins, color = nationality)) +
-  geom_point(size = 2) +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
-  labs(x = "Drivers", y = "Wins", 
-       title = "Total Wins around the World", 
-       subtitle = "Seasons 2018 to 2020") +
-  theme(legend.title = element_blank())
-
-ggplotly(plt1, tooltip = 'wins')
-
-# Nationality
-plt2 <- f1_18_20 %>%
-  group_by(nationality) %>% 
-  ggplot(aes(wins, nationality, color = nationality)) +
-  geom_point(size = 2) +
-  labs(x = "Wins", y = "Nationalities", 
-       title = "Total Wins around the World", 
-       subtitle = "Seasons 2018 to 2020") +
-  scale_x_discrete(guide = guide_axis(angle = 70)) +
-  theme(legend.title = element_blank(),
-        legend.position = "none")
-
-ggplotly(plt2, tooltip = 'wins')
-
-View(f1_18_20)
 #GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM CADA PISTA
 plt3 <- f1_18_20 %>% 
   group_by(TrackName) %>% 
-  filter(position == 1) %>% #, code %in% c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
+  filter(position == 1) %>% 
   arrange(wins) %>%
   ggplot(aes(x = reorder(TrackName, -position), y = position, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Seasons 2018-2020") +
-  # scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank()) +
   coord_flip()
 
 
-f1_18_20 %>% filter(TrackName == "Italian Grand Prix", year == "2020", position == 1)
-
 ggplotly(plt3, tooltip = 'wins')
-
-# IDEIA: ACRESCENTAR A POSICAO DE GRID DO QUALLIFYING E CRIAR UMA COLUNA QUE 
-# CALCULA QUANTAS ULTRAPASSAGENS FORAM FEITAS NA CORRIDA:
-# POSITION_RACE - POSITION_GRID (EM QUE SER NUMERO PRA FAZER A CONTA)
-# PLOTAR UM GRAFICO QUE MOSTR AS ULTRAPASSAGENS (PILOTO QUE MAIS ULTRAPASSOU AO
-# LONGO DO ANO -> CHEQUITO CTZ RS)
-# PROBLEMA: N?O TA RODANDO O ARQUIVO "CLEANING" 
 
 ############## Geral ##############
 
 # Nationality
-
 plt4 <- f1 %>%
   group_by(nationality) %>% 
   ggplot(aes(wins, nationality, color = nationality)) +
@@ -308,20 +253,6 @@ f1 %>%
   coord_flip()
 
 
-#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS NA HIST?RIA
-f1 %>% 
-  filter(position == 1) %>% 
-  ggplot(aes(x = reorder(driverRef, position), y = position, fill = driverRef)) +
-  geom_col() +
-  labs(x = "Driver", y = "Wins", 
-       title = "Championship", 
-       subtitle = "Seasons 1950-2020") +
-  theme(legend.title = element_blank(),
-        legend.position = "none") +
-  coord_flip()
-
-
-
 ############## Constructor ############## 
 constructor %>% 
   filter(year.x > 2015) %>% 
@@ -331,17 +262,3 @@ constructor %>%
   labs(x = "", y="Position", title = "Resultado final de cada construtora")+
   facet_grid(constructorRef ~ .)
 
-
-
-#TENTATIVA
-constructor %>% 
-  filter(year.x > 2015) %>% 
-  group_by(raceId) %>%
-  ggplot(aes(x = year.x, y = position, group = constructorRef, colour = constructorRef)) + 
-  geom_line() + 
-  theme(legend.title = element_blank()) +
-  #facet_wrap(~ constructorRef) +
-  #scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
-  labs(title = "Resultado final de construtores ao longo dos ?ltimos 5 anos")
-
-names(constructor)
