@@ -25,23 +25,24 @@ names(constructor)
 ############## 2018 - 2020 ##############
 ##############  Separado  ##############
 
-# Tabela do campeontato -> sugestao: cores iguais para pilotos da mesma equipe (fill = constructor)
+##################
+###### 2020 ######
+##################
 
-# 2020
+# Classifica??o Cameponato
 f1_18_20 %>% 
   filter(year == 2020, round == 17) %>% 
-  #arrange(desc(standing_driver_points)) %>% 
   ggplot(aes(x = reorder(code, standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
        subtitle = "Season 2020") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
   coord_flip()
     
 
+# Quantidade de vit?rias por piloto
 f1_18_20 %>% 
   filter(year == 2020, round == 17) %>% 
   arrange(wins) %>% 
@@ -50,40 +51,36 @@ f1_18_20 %>%
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2020") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
   coord_flip()
 
-# Each drivers gets his own
-f1_18_20 %>% 
-  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
-  ggplot(aes(x = round, y = standing_driver_points, group = code, colour = code)) + 
-    geom_line(show.legend = FALSE) + 
-    facet_wrap(~ code) +
-    scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
-    labs(title = 'F1 race results 2020, top 5 drivers')
 
-f1_18_20 %>% 
-  filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
-  group_by(code) %>% 
-  arrange(desc(standing_driver_points)) %>% 
-  # head(5) %>% 
-  ggplot(aes(x = round, y = position, group = code, colour = code)) + 
-  geom_line() +
-  scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
-  labs(title = 'F1 race results 2020, top 5 drivers')
+# # Each drivers gets his own
+# f1_18_20 %>% 
+#   filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>% 
+#   ggplot(aes(x = round, y = standing_driver_points, group = code, colour = code)) + 
+#     geom_line(show.legend = FALSE) + 
+#     facet_wrap(~ code) +
+#     scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
+#     labs(title = 'F1 race results 2020, top 5 drivers')
+
+
+# f1_18_20 %>% 
+#   filter(year == 2020, code == c("HAM", "BOT", "VER", "PER", "RIC")) %>%
+#   group_by(code) %>% 
+#   arrange(desc(standing_driver_points)) %>% 
+#   # head(5) %>% 
+#   ggplot(aes(x = round, y = position, group = code, colour = code)) + 
+#   geom_line() +
+#   scale_x_discrete(breaks=c(1, 6, 11, 16, 21)) +
+#   labs(title = 'F1 race results 2020, top 5 drivers')
 
 
 ########## OVERTAKES ###########
 
-View(qualifying)
-
-names(qualifying)
-names(f1)
-
-library(hablar)
 # install.packages("hablar")
+library(hablar)
 
 f1 <- f1 %>% 
   convert(int(raceId))
@@ -147,21 +144,24 @@ f1_ot %>%
 
 
 
+##################
+###### 2019 ######
+##################
 
-# 2019
+# Classificacao Campeonato
 f1_18_20 %>% 
   filter(year == 2019, round == 21) %>% 
-  #arrange(standing_driver_points) %>% 
   ggplot(aes(x = reorder(code, standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
        subtitle = "Season 2019") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
     coord_flip()
 
+
+# Quantidade de vit?rias por piloto
 f1_18_20 %>% 
   filter(year == 2019, round == 21) %>% 
   arrange(wins) %>% 
@@ -170,26 +170,30 @@ f1_18_20 %>%
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2019") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
   coord_flip()
 
 
-# 2018
+##################
+###### 2018 ######
+##################
+
+
+# Classifica??o Campeonato
 f1_18_20 %>% 
   filter(year == 2018, round == 21) %>% 
-  #arrange(standing_driver_points) %>% 
   ggplot(aes(x = reorder(code, standing_driver_points), y = standing_driver_points, fill = code)) +
   geom_col() +
   labs(x = "Driver", y = "Points", 
        title = "Championship", 
        subtitle = "Season 2018") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
     coord_flip()
 
+
+# Quantidade de vit?rias por piloto
 f1_18_20 %>% 
   filter(year == 2018, round == 21) %>% 
   arrange(wins) %>% 
@@ -198,41 +202,25 @@ f1_18_20 %>%
   labs(x = "Driver", y = "Wins", 
        title = "Championship", 
        subtitle = "Season 2018") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none") +
   coord_flip()
 
 
+#########################################
 ############## 2018 - 2020 ##############
 ##############    Junto    ##############
-
-#TENTATIVA DE PLOTAR AS TABELAS DO CAMPEONATO JUNTO
-#obs: tentar mudar a ordem do ano de 2019 (deixar na ordem)
-f1_18_20 %>% 
-  filter(round == 21) %>% 
-  #arrange(desc(standing_driver_points)) %>% 
-  ggplot(aes(x = reorder(code, standing_driver_points), y = standing_driver_points, fill = code)) +
-  geom_col() +
-  facet_wrap(~ year) +
-  labs(x = "Driver", y = "Points", 
-       title = "Championship", 
-       subtitle = "Seasons 2018-19") +
-  #scale_x_discrete(guide = guide_axis(angle = 70)) +
-  theme(legend.title = element_blank(),
-        legend.position = "none") +
-  coord_flip()
 
 
 #melhorar como ta feito esse grafico
 # ChampionShip
-f1_18_20 %>% 
-  filter(code == c("HAM", "BOT", "VER", "PER", "RIC", "VET", "SAI", "LEC")) %>% 
-  ggplot(aes(x=year, y=position, color = code, group = code)) +
-  geom_point() +
-  geom_line() +
-  labs(y="Position")+
-  facet_grid(code ~ .)
+# f1_18_20 %>% 
+#   filter(code == c("VET", "SAI", "LEC", "ALB", "GAS", "NOR", "RUS")) %>% 
+#   ggplot(aes(year, position, color = code, group = code)) +
+#   geom_point() +
+#   geom_line() +
+#   labs(y="Position")+
+#   facet_grid(code ~ .)
 
 # Nationality
 plt1 <- f1_18_20 %>%
@@ -291,33 +279,26 @@ ggplotly(plt3, tooltip = 'wins')
 ############## Geral ##############
 
 # Nationality
+
 plt4 <- f1 %>%
   group_by(nationality) %>% 
   ggplot(aes(wins, nationality, color = nationality)) +
-  geom_point(size = 2) +
+  geom_point(size = 4) +
   labs(x = "Wins", y = "Nationalities", 
        title = "Total Wins around the World", 
-       subtitle = "Seasons 1950 to 2021") +
+       subtitle = "All Seasons") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank(),
         legend.position = "none")
 
 ggplotly(plt4, tooltip = 'wins')
 
-f1 %>% 
-  #filter(!is.na(standing_driver_points)) %>% 
-  filter(year != 2021) %>% 
-  summarise(champion_points = max(standing_driver_points)) %>% 
-  arrange(desc(year)) %>%
-  ggplot(aes(x = year, y = champion_points, color = champion_points)) +
-  geom_point(size = 2) +
-  labs(x = "Year", y = "Points", title = "Championship") +
-  theme(legend.title = element_blank())
 
 #GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS EM MONACO
 f1 %>% 
   filter(position == 1, TrackName == "Monaco Grand Prix") %>%
-  ggplot(aes(x = driverRef, y = position, fill = driverRef)) +
+  group_by(driverRef) %>% 
+  ggplot(aes(x = reorder(driverRef, position),  y = position, fill = driverRef)) +
   geom_col() +
   labs(x = "Driver", y = "Wins", 
        title = "Monaco Grand Prix", 
@@ -349,6 +330,7 @@ constructor %>%
   geom_line() +
   labs(x = "", y="Position", title = "Resultado final de cada construtora")+
   facet_grid(constructorRef ~ .)
+
 
 
 #TENTATIVA
