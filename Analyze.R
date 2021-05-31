@@ -6,17 +6,17 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-# qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
-qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
+qualifying <- read_csv("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\qualifying.csv")
+# qualifying <- read.csv("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\qualifying.csv")
 
-# f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
-f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
+f1 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1.xlsx")
+# f1 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1.xlsx")
 
-# f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
-f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
+f1_18_20 <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_18_20.xlsx")
+# f1_18_20 <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_18_20.xlsx")
 
-# constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
-constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
+constructor <- read_excel("C:\\Users\\manu-\\Documents\\INSPER\\7_semestre\\R_dados\\APS_R_dados\\f1_constructor.xlsx")
+# constructor <- read_excel("C:\\Users\\Victor Habib\\Documents\\INSPER\\7_semestre\\R_para_dados\\APS_R_dados\\f1_constructor.xlsx")
 
 View(f1)
 
@@ -101,7 +101,7 @@ f1_ot %>%
   ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes - 1º ao 5º colocado", 
+       title = "Overtakes - 1? ao 5? colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -114,7 +114,7 @@ f1_ot %>%
   ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes - 6º ao 10º colocado", 
+       title = "Overtakes - 6? ao 10? colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -127,7 +127,7 @@ f1_ot %>%
   ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes - 11º ao 15º colocado", 
+       title = "Overtakes - 11? ao 15? colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -140,7 +140,7 @@ f1_ot %>%
   ggplot(aes(x = reorder(TrackName, round), y = overtakes, fill = code)) +
   geom_col() +
   labs(x = "Race", y = "Overtakes", 
-       title = "Overtakes - 16º ao 20º colocado", 
+       title = "Overtakes - 16? ao 20? colocado", 
        subtitle = "Season 2020") +
   scale_x_discrete(guide = guide_axis(angle = 70)) +
   theme(legend.title = element_blank())
@@ -327,7 +327,7 @@ f1 %>%
   coord_flip()
 
 
-#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS NA HISTÓRIA
+#GR?FICO QUE MOSTRA QUAL PILOTO VENCEU MAIS NA HIST?RIA
 f1 %>% 
   filter(position == 1) %>% 
   ggplot(aes(x = reorder(driverRef, position), y = position, fill = driverRef)) +
@@ -360,6 +360,6 @@ constructor %>%
   theme(legend.title = element_blank()) +
   #facet_wrap(~ constructorRef) +
   #scale_x_discrete(breaks=c('R01', 'R06', 'R11', 'R16', 'R21')) +
-  labs(title = "Resultado final de construtores ao longo dos últimos 5 anos")
+  labs(title = "Resultado final de construtores ao longo dos ?ltimos 5 anos")
 
 names(constructor)
